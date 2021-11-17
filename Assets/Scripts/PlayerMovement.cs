@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //Debug.Debug.Log("Hello Julius");
+    //Debug.Debug.Log(" Hello Julius ");
     //VARIABLES
     [SerializeField] private float moveSpeed;
     [SerializeField] private float walkSpeed;
