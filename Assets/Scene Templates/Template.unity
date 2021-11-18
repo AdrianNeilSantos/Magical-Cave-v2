@@ -354,6 +354,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 963194228}
+    - target: {fileID: 5421262743256281952, guid: 2f9b6461e3cfdb34fa9f97993da387fd, type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 963194228}
     - target: {fileID: 5421262743256281955, guid: 2f9b6461e3cfdb34fa9f97993da387fd, type: 3}
       propertyPath: m_Name
       value: Player
@@ -493,11 +497,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7752991217206052134, guid: 3109eef926226d04c9f1ffe8aef16ac5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000010749724
+      value: -0.0000000010749722
       objectReference: {fileID: 0}
     - target: {fileID: 7752991217206052134, guid: 3109eef926226d04c9f1ffe8aef16ac5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -3.0285316e-11
+      value: 3.028531e-11
       objectReference: {fileID: 0}
     - target: {fileID: 7752991217206052135, guid: 3109eef926226d04c9f1ffe8aef16ac5, type: 3}
       propertyPath: m_LookAt
