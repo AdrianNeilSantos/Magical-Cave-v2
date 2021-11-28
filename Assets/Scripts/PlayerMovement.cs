@@ -31,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     public Transform mainCam;
 
+    public Inventory inventory;
+
+
+
+
 
     private void Start() {
         controller = GetComponent<CharacterController>();
@@ -108,11 +113,6 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-
-
-
-
-
     private void Idle(){
         animator.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
     }
@@ -136,5 +136,16 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         animator.SetTrigger("Jump");
     }
+
+
+
+
+    private void OnControllerColliderHit(ControllerColliderHit hit) {
+        IInventoryItem item = hit.collider.GetComponent<IInventoryItem>();
+        if(item != null){
+            inventory.AddItem(item);
+        }
+    }
+
 
 }
