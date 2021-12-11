@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 377158914956963085}
   m_Layer: 0
-  m_Name: projectile_impact
+  m_Name: projectile_impact_White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

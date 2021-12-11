@@ -7,6 +7,10 @@ public class ProjectileScript : MonoBehaviour
     public GameObject projectileImpact;
     private bool collided;
 
+
+
+
+
     void OnCollisionEnter(Collision other) {
         if(other.gameObject.tag != "Projectile" && other.gameObject.tag != "Player" && !collided){
             collided = true;
