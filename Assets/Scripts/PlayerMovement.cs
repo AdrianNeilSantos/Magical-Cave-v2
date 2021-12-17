@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float gravity;
 
 
+
     //REFERENCES
 
     private CharacterController controller;
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform mainCam;
 
     public Inventory inventory;
+    
 
 
 
