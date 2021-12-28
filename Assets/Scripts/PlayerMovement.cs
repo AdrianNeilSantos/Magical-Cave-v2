@@ -32,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     public Transform mainCam;
 
-    public Inventory inventory;
     
 
 
@@ -140,14 +139,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
-
-    private void OnControllerColliderHit(ControllerColliderHit hit) {
-        IInventoryItem item = hit.collider.GetComponent<IInventoryItem>();
-        if(item != null){
-            inventory.AddItem(item);
-        }
-    }
 
 
 }
