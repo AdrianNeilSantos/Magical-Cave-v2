@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: projectile_impact_Red
       objectReference: {fileID: 0}
+    - target: {fileID: 1902546499277384231, guid: 52e3e21521f51114980cdab420cccc4f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 6138860238140245754, guid: 52e3e21521f51114980cdab420cccc4f, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 1

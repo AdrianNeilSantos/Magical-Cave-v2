@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Projectile
   - Bounds
+  - ProjectileRed
+  - ProjectileBlue
+  - ProjectileWhite
+  - Enemy
   layers:
   - Default
   - TransparentFX

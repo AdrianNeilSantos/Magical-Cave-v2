@@ -20,7 +20,6 @@ public class ProjectileScript : MonoBehaviour
                 //Quaternion.Identity = rotation of prefab
                 var impact = Instantiate(projectileImpact, other.contacts[0].point, Quaternion.identity) as GameObject;
 
-                
                 Destroy (impact,1);
             }
 

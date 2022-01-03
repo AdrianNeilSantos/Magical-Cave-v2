@@ -12,6 +12,10 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float jumpHeight;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
+    private bool isFeared;
+    private float fearDuration;
+    private bool isDead = false;
+
 
 
     private Vector3 forward, right;
@@ -31,6 +35,8 @@ public class EnemyMovement : MonoBehaviour
     public Transform playerTransform;
     public GameObject colorTag;
     private Animator animator;
+    private EnemyStats enemyStats;
+    private Collider colliderN;
     
 
 
@@ -38,6 +44,9 @@ public class EnemyMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
+        isFeared = false;
+        enemyStats = GetComponent<EnemyStats>();
+        colliderN = GetComponent<Collider>();
 
     }
 
@@ -46,14 +55,29 @@ public class EnemyMovement : MonoBehaviour
     {
         float EnemyToPlayerDistance = Vector3.Distance(playerTransform.position, transform.position);
 
-        if(EnemyToPlayerDistance < detectDistance){
+        if( (isFeared || EnemyToPlayerDistance < detectDistance) && !isDead){
             Move();
+        }
+        else if(isDead){
+            Die();
+            Destroy(this.gameObject, 3);
         }
         else{
             Idle();
         }
 
         applyGravity();
+        if(fearDuration > 0){
+            fearDuration -= Time.deltaTime;
+        }
+        else if (fearDuration < 0){
+            fearDuration = 0;
+            isFeared = false;
+        }
+
+        if(enemyStats.currentHealth <= 0){
+            Die();
+        }
     }
 
 
@@ -65,15 +89,22 @@ public class EnemyMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
-        float horizontal = 1f;
-        float vertical = 0f;
-
+        // float horizontal = 1f;
+        // float vertical = 0f;
+        Vector3 direction;
         //setting up the direction towards the player
-        Vector3 direction = (playerTransform.position - transform.position).normalized;
+        if(isFeared){
+            //away from player
+            direction = (playerTransform.position - transform.position).normalized *-1;
+        }
+        else{
+            //towards player
+            direction = (playerTransform.position - transform.position).normalized;
+        }
 
 
 
-        if(direction.magnitude >= 0.1f && (colorTag.name == "White" || colorTag.name == colorTrigger)){
+        if( (direction.magnitude >= 0.1f && (colorTag.name == "White" || colorTag.name == colorTrigger)) || isFeared ){
             //no mainCam variable
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y,targetAngle,ref turnSmoothVelocity,turnSmoothTime);
@@ -81,7 +112,7 @@ public class EnemyMovement : MonoBehaviour
 
             if(isGrounded){
                 if(direction != Vector3.zero){
-                    Walk();
+                    Run();
                 }
             }
 
@@ -92,15 +123,20 @@ public class EnemyMovement : MonoBehaviour
             Idle();
         }
 
-
-
-        
     }
 
     private void applyGravity(){
         //gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+
+    void OnCollisionEnter(Collision other) {
+        if(other.gameObject.tag == "ProjectileRed"){
+            fearDuration = 5;
+            isFeared = true;
+        }
     }
 
 
@@ -123,7 +159,8 @@ public class EnemyMovement : MonoBehaviour
     private void Die(){
         moveSpeed = 0;
         animator.SetFloat("AnimIndex",1f,0.5f,Time.deltaTime);
-
+        colliderN.isTrigger = true;
+        isDead = true;
     }
 
 
