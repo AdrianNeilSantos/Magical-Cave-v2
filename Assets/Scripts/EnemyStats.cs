@@ -19,7 +19,6 @@ public class EnemyStats : MonoBehaviour
             TakeDamage(1);
             updateHealth();
         }
-        Debug.Log(other.gameObject.name);
     }
 
     void TakeDamage(int damage){
