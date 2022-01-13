@@ -43,6 +43,9 @@ public class PlayerStats : MonoBehaviour
         }
 
 
+        if(currentHealth == 0){
+            Die();
+        }
 
 
     }
@@ -83,6 +86,13 @@ public class PlayerStats : MonoBehaviour
         // }
         Debug.Log(other);
     }
+
+    public void Die(){
+        FindObjectOfType<GameManager>().EndGame();
+    }
+
+
+
 
 
 }
