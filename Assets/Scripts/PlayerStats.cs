@@ -9,48 +9,61 @@ public class PlayerStats : MonoBehaviour
 
     public HealthBar healthBar; 
     private Collider colliderN;
+    private bool isImmune;
     private float immuneDuration = 3f;
 
     void Start(){
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         colliderN = GetComponent<Collider>();
+        isImmune = false;
     }
 
     void Update(){
         if(Input.GetKeyDown(KeyCode.Minus)){
             TakeDamage(1);
-            updateHealth();
         }
         else if(Input.GetKeyDown(KeyCode.Equals)){
             RestoreHealth(1);
+        }
+
+
+
+        if(isImmune){
+            if(immuneDuration > 0){
+                immuneDuration -= Time.deltaTime;
+            }
+            else if (immuneDuration < 0){
+                immuneDuration = 0;
+            }
+            else if(immuneDuration == 0){
+                isImmune = false;
+                immuneDuration = 3;
+            }
+        }
+
+
+
+
+    }
+
+
+
+    public void TakeDamage(int damage){
+        if(!isImmune){
+            currentHealth -= damage;
+            isImmune = true;
             updateHealth();
         }
 
-
-        if(immuneDuration > 0){
-            immuneDuration -= Time.deltaTime;
-        }
-        else if (immuneDuration < 0){
-            immuneDuration = 0;
-            colliderN.isTrigger = false;
-        }
-
-
-
     }
 
-
-
-    void TakeDamage(int damage){
-        currentHealth -= damage;
-    }
-
-    void RestoreHealth(int health){
+    public void RestoreHealth(int health){
         currentHealth += health;
+        updateHealth();
     }
 
-    void updateHealth(){
+    public void updateHealth(){
         if(currentHealth < 0){
             currentHealth = 0;
         }

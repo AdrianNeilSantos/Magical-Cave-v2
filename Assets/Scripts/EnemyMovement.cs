@@ -27,6 +27,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float gravity;
     [SerializeField] private float detectDistance;
+    [SerializeField] private float damageDistance = 2;
     [SerializeField] private string colorTrigger;
 
 
@@ -36,7 +37,9 @@ public class EnemyMovement : MonoBehaviour
     public GameObject colorTag;
     private Animator animator;
     private EnemyStats enemyStats;
+    private PlayerStats playerStats;
     private Collider colliderN;
+    public GameObject player;
     
 
 
@@ -46,6 +49,7 @@ public class EnemyMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         isFeared = false;
         enemyStats = GetComponent<EnemyStats>();
+        playerStats = player.GetComponent<PlayerStats>();
         colliderN = GetComponent<Collider>();
 
     }
@@ -73,6 +77,11 @@ public class EnemyMovement : MonoBehaviour
         else if (fearDuration < 0){
             fearDuration = 0;
             isFeared = false;
+        }
+
+
+        if(EnemyToPlayerDistance < damageDistance && !isDead){
+            playerStats.TakeDamage(1);
         }
 
         if(enemyStats.currentHealth <= 0){
