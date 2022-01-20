@@ -14,7 +14,7 @@ public class CurrencyUI : MonoBehaviour
     }
 
     void Update() {
-        score.text = "Currency: " + Currency.getCurrency();
+        score.text = Currency.getCurrency().ToString();
     }
 
 
