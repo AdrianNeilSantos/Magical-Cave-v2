@@ -20,13 +20,6 @@ public class PlayerStats : MonoBehaviour
     }
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.Minus)){
-            TakeDamage(1);
-        }
-        else if(Input.GetKeyDown(KeyCode.Equals)){
-            RestoreHealth(1);
-        }
-
 
 
         if(isImmune){
@@ -77,15 +70,6 @@ public class PlayerStats : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
-    void OnCollisionEnter(Collision other){
-        // if(other.gameObject.tag == "Enemy"){
-        //     TakeDamage(1);
-        //     updateHealth();
-        //     colliderN.isTrigger = true;
-        //     Debug.Log(other.gameObject.name);
-        // }
-        Debug.Log(other);
-    }
 
     public void Die(){
         FindObjectOfType<GameManager>().EndGame();
